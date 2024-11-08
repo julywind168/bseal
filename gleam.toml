@@ -1,5 +1,5 @@
 name = "bseal"
-version = "1.0.0"
+version = "1.0.1"
 description = "Generate UUIDs"
 licences = ["Apache-2.0"]
 repository = { type = "github", user = "julywind168", repo = "bseal" }
