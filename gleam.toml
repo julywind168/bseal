@@ -1,12 +1,9 @@
 name = "bseal"
 version = "1.0.0"
+description = "Generate UUIDs"
+licences = ["Apache-2.0"]
+repository = { type = "github", user = "julywind168", repo = "bseal" }
 
-# Fill out these fields if you intend to generate HTML documentation or publish
-# your project to the Hex package manager.
-#
-# description = ""
-# licences = ["Apache-2.0"]
-# repository = { type = "github", user = "", repo = "" }
 # links = [{ title = "Website", href = "" }]
 #
 # For a full reference of all the available options, you can have a look at
