@@ -3,9 +3,9 @@
 [![Package Version](https://img.shields.io/hexpm/v/bseal)](https://hex.pm/packages/bseal)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/bseal/)
 
-bseal (Bamboo Seal) is number uuid generators, include (48 bits, 54 bits, 60 bits)
+bseal (Bamboo Seal) is number uuid generators, include (48 bits, 54 bits, 60 bits) for Gleam
 
-when base64 encode the string length is short:
+when base64 encode the string length is short
 
 uuid48: string length is 8
 
