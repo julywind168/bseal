@@ -20,9 +20,8 @@ gleam add bseal
 import bseal/uuid48
 
 pub fn main() {
-  // 1_704_038_400 2024-01-01 00:00:00
-  let uuid = uuid48.start(1, 1_704_038_400)
-  io.debug(uuid.string()) // out: "abcd1234"
+  let assert Ok(uuid) = uuid48.start(1, 1_704_038_400) // 2024-01-01
+  io.debug(uuid |> uuid48.string()) // out: "abcd1234"
 }
 ```
 
