@@ -9,6 +9,8 @@ import gleam/erlang/process.{type Subject}
 import gleam/int
 import gleam/otp/actor
 
+const timeout = 5000
+
 const nodeid_bits = 4
 
 const time_bits = 30
@@ -32,18 +34,31 @@ type Self {
 }
 
 pub type Message {
-  Generate(client: Subject(String))
+  Generate(client: Subject(Int))
 }
 
 pub type UUID48 =
   Subject(Message)
 
-pub fn string(service: UUID48) -> String {
-  process.call(service, Generate, 1200)
+pub fn string_with(service: UUID48, encode: fn(BitArray) -> String) -> String {
+  let id = service |> int
+  encode(<<id:size(48)>>)
 }
 
-pub fn start(nodeid: Int, epoch: Int) -> Result(UUID48, actor.StartError) {
-  case nodeid >= 1 && nodeid <= max_nodeid() {
+pub fn string(service: UUID48) -> String {
+  let id = service |> int
+  bit_array.base64_encode(<<id:size(48)>>, False)
+}
+
+pub fn int(service: UUID48) -> Int {
+  process.call(service, Generate, timeout)
+}
+
+pub fn start(
+  nodeid nodeid: Int,
+  epoch epoch: Int,
+) -> Result(UUID48, actor.StartError) {
+  case nodeid >= 0 && nodeid <= max_nodeid() {
     True -> {
       actor.start(
         Self(nodeid:, epoch:, time: now(), idx: 0),
@@ -57,12 +72,12 @@ pub fn start(nodeid: Int, epoch: Int) -> Result(UUID48, actor.StartError) {
     }
     False ->
       panic as {
-        "uuid48 expected nodeid is 1 .. 15, got " <> int.to_string(nodeid)
+        "uuid48 expected nodeid is 0..15, got " <> int.to_string(nodeid)
       }
   }
 }
 
-fn generate(self: Self) -> #(String, Self) {
+fn generate(self: Self) -> #(Int, Self) {
   let current = now()
 
   case current > self.time {
@@ -87,13 +102,11 @@ fn generate(self: Self) -> #(String, Self) {
   }
 }
 
-fn uuid(nodeid: Int, time: Int, idx: Int) -> String {
+fn uuid(nodeid: Int, time: Int, idx: Int) -> Int {
   let assert True = time < max_time()
-  let id =
-    int.bitwise_shift_left(nodeid, time_bits)
-    + int.bitwise_shift_left(time, index_bits)
-    + idx
-  bit_array.base64_encode(<<id:size(48)>>, True)
+  int.bitwise_shift_left(nodeid, time_bits)
+  + int.bitwise_shift_left(time, index_bits)
+  + idx
 }
 
 fn now() {

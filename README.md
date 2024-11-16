@@ -3,9 +3,9 @@
 [![Package Version](https://img.shields.io/hexpm/v/bseal)](https://hex.pm/packages/bseal)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://hexdocs.pm/bseal/)
 
-bseal (Bamboo Seal) is number uuid generators, include (48 bits, 54 bits, 60 bits) for Gleam
+bseal (Bamboo Seal) is number uuid generators, include (48 bits, 54 bits, 60 bits) for Gleam.
 
-when base64 encode the string length is short
+after base64 encode the string length is short.
 
 uuid48: string length is 8
 
@@ -20,8 +20,11 @@ gleam add bseal
 import bseal/uuid48
 
 pub fn main() {
-  let assert Ok(uuid) = uuid48.start(1, 1_704_038_400) // 2024-01-01
-  io.debug(uuid |> uuid48.string()) // out: "abcd1234"
+  let assert Ok(uuid) = uuid48.start(nodeid: 0, epoch: 1_704_038_400) // epoch: 2024-01-01
+  io.debug(uuid |> uuid48.int()) // output: 453607800833
+  io.debug(uuid |> uuid48.string()) // output: "AGmdPkAC"
+  // with custom encoder
+  io.debug(uuid |> uuid48.string_with(bit_array.base64_encode(_, False))) // output: "AGmdPkAD"
 }
 ```
 
