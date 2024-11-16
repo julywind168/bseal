@@ -1,6 +1,9 @@
 //// generate a 48 bits number uuid (string length is 8)
+//// 
 //// nodeid (4 bit): 1 - 15 
+//// 
 //// time (30 bit): 34 years
+//// 
 //// index (14 bit): 1 - 16383  (generates of per second)
 
 import bseal/base64
