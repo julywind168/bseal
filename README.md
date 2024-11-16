@@ -20,11 +20,9 @@ gleam add bseal
 import bseal/uuid48
 
 pub fn main() {
-  let assert Ok(uuid) = uuid48.start(nodeid: 0, epoch: 1_704_038_400) // epoch: 2024-01-01
+  let assert Ok(uuid) = uuid48.start(nodeid: 1, epoch: 1_704_038_400) // epoch: 2024-01-01
   io.debug(uuid |> uuid48.int()) // output: 453607800833
   io.debug(uuid |> uuid48.string()) // output: "AGmdPkAC"
-  // with custom encoder
-  io.debug(uuid |> uuid48.string_with(bit_array.base64_encode(_, False))) // output: "AGmdPkAD"
 }
 ```
 

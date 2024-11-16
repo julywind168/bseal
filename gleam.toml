@@ -1,5 +1,5 @@
 name = "bseal"
-version = "1.0.1"
+version = "1.1.0"
 description = "Generate UUIDs"
 licences = ["Apache-2.0"]
 repository = { type = "github", user = "julywind168", repo = "bseal" }
@@ -11,7 +11,6 @@ repository = { type = "github", user = "julywind168", repo = "bseal" }
 
 [dependencies]
 gleam_stdlib = ">= 0.34.0 and < 2.0.0"
-birl = ">= 1.7.1 and < 2.0.0"
 gleam_erlang = ">= 0.28.0 and < 1.0.0"
 gleam_otp = ">= 0.13.0 and < 1.0.0"
 
