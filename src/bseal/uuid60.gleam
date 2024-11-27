@@ -7,7 +7,7 @@
 //// index (22 bit): 1 - 4194303 (generates of per second)
 
 import bseal/base64
-import bseal/time.{now}
+import gleam/erlang
 import gleam/erlang/process.{type Subject}
 import gleam/int
 import gleam/otp/actor
@@ -108,4 +108,8 @@ fn uuid(nodeid: Int, time: Int, idx: Int) -> Int {
   int.bitwise_shift_left(nodeid, time_bits + index_bits)
   + int.bitwise_shift_left(time, index_bits)
   + idx
+}
+
+fn now() {
+  erlang.system_time(erlang.Second)
 }
