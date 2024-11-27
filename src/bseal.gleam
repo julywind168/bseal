@@ -1,4 +1,4 @@
-import bseal/base64
+import bseal/internal/base64
 import bseal/uuid48
 import gleam/io
 

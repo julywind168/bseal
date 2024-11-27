@@ -6,7 +6,7 @@
 //// 
 //// index (22 bit): 1 - 4194303 (generates of per second)
 
-import bseal/base64
+import bseal/internal/base64
 import gleam/erlang
 import gleam/erlang/process.{type Subject}
 import gleam/int
